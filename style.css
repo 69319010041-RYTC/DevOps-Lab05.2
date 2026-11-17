@@ -1,0 +1,340 @@
+:root {
+  color-scheme: light;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #172033;
+  background: #f3f6fa;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 360px;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 12% 0%, #e0ecff 0, transparent 34rem),
+    #f3f6fa;
+}
+
+button {
+  font: inherit;
+}
+
+.page {
+  width: min(100% - 48px, 1210px);
+  margin: 0 auto;
+  padding: 48px 0 28px;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  margin: 0 0 7px;
+  color: #4169b2;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.65rem);
+  line-height: 1.15;
+}
+
+.instructions {
+  max-width: 680px;
+  margin: 10px 0 0;
+  color: #596579;
+  line-height: 1.6;
+}
+
+.header-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.music-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.music-status {
+  min-height: 1em;
+  color: #788397;
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+.music-button {
+  min-height: 46px;
+  padding: 0 16px;
+  border: 1px solid #d6deea;
+  border-radius: 12px;
+  background: #fff;
+  color: #315eb5;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.music-button:hover {
+  background: #f3f6fb;
+  transform: translateY(-1px);
+}
+
+.music-button[aria-pressed="false"] {
+  color: #596579;
+}
+
+.restart-button {
+  flex: 0 0 auto;
+  min-height: 46px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 12px;
+  background: #315eb5;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 5px 14px #315eb530;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.restart-button:not(:disabled):hover {
+  background: #254c98;
+  transform: translateY(-1px);
+}
+
+.restart-button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+.game-card {
+  padding: 22px;
+  border: 1px solid #e1e7f0;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 18px 48px #243a5a12;
+}
+
+.game-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 28px;
+  margin: 0 2px 18px;
+  color: #596579;
+}
+
+.game-status p {
+  margin: 0;
+}
+
+#game-message {
+  font-weight: 650;
+}
+
+.piece-counter {
+  white-space: nowrap;
+}
+
+.piece-counter strong {
+  color: #315eb5;
+  font-size: 1.15rem;
+}
+
+.playfield {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 738px) 330px;
+  align-items: start;
+  gap: 24px;
+}
+
+.board {
+  position: relative;
+  width: 100%;
+  max-width: 738px;
+  aspect-ratio: 738 / 387;
+  overflow: hidden;
+  border: 2px dashed #9aabc2;
+  border-radius: 14px;
+  background: #eaf0f8;
+}
+
+.board-image-hint,
+.board-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.board-image-hint {
+  background: url("car.jpg") center / 100% 100% no-repeat;
+  opacity: 0.15;
+}
+
+.board-grid {
+  background-image:
+    linear-gradient(to right, transparent calc(100% - 1px), #70829b55 calc(100% - 1px)),
+    linear-gradient(to bottom, transparent calc(100% - 1px), #70829b55 calc(100% - 1px));
+  background-size: 25% 20%;
+}
+
+.tray {
+  min-width: 0;
+  min-height: 100%;
+  padding: 14px;
+  border: 1px solid #e4e9f1;
+  border-radius: 14px;
+  background: #f8fafd;
+}
+
+.tray h2 {
+  height: 27px;
+  margin: 0 0 8px;
+  color: #596579;
+  font-size: 0.94rem;
+}
+
+.tray-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+  gap: 3px;
+  min-height: 290px;
+}
+
+.piece-layer {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.puzzle-piece {
+  position: absolute;
+  overflow: visible;
+  touch-action: none;
+  cursor: grab;
+  pointer-events: auto;
+  filter: drop-shadow(0 2px 3px #16243c55);
+  user-select: none;
+}
+
+.puzzle-piece:active,
+.puzzle-piece.is-dragging {
+  cursor: grabbing;
+  filter: drop-shadow(0 8px 8px #16243c55);
+}
+
+.puzzle-piece.is-placed {
+  cursor: default;
+  filter: drop-shadow(0 1px 2px #16243c55);
+}
+
+.piece-outline {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+  stroke-width: 2px;
+  vector-effect: non-scaling-stroke;
+}
+
+footer {
+  margin: 18px 4px 0;
+  color: #788397;
+  font-size: 0.82rem;
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .page {
+    width: min(100% - 32px, 720px);
+    padding-top: 30px;
+  }
+
+  .playfield {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .tray {
+    min-height: 0;
+  }
+
+  .tray-grid {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 560px) {
+  .page {
+    width: min(100% - 20px, 520px);
+    padding-top: 22px;
+  }
+
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .header-actions {
+    width: 100%;
+  }
+
+  .header-actions button {
+    flex: 1;
+  }
+
+  .music-control {
+    flex: 1;
+  }
+
+  .music-control .music-button {
+    width: 100%;
+  }
+
+  .game-card {
+    padding: 12px;
+    border-radius: 16px;
+  }
+
+  .game-status {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 12px;
+  }
+
+  .tray {
+    padding: 10px;
+  }
+
+  .tray-grid {
+    min-height: 230px;
+  }
+
+  footer {
+    text-align: left;
+  }
+}

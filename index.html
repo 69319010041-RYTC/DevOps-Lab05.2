@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3f6fa">
+    <title>Jigsaw Puzzle - Car</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="page">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">JIGSAW PUZZLE</p>
+          <h1>ต่อภาพรถให้ครบ!</h1>
+          <p class="instructions">ลากชิ้นส่วนไปวางบนกระดาน วางใกล้ตำแหน่งที่ถูกต้องเพื่อให้ชิ้นส่วนล็อกเข้าที่</p>
+        </div>
+        <div class="header-actions">
+          <div class="music-control">
+            <button class="music-button" id="music-button" type="button" aria-pressed="true">♫ ปิดเพลง</button>
+            <span class="music-status" id="music-status" role="status" aria-live="polite"></span>
+          </div>
+          <button class="restart-button" id="restart-button" type="button" disabled>เริ่มเกมใหม่</button>
+        </div>
+      </header>
+
+      <section class="game-card" aria-label="เกมจิ๊กซอว์">
+        <div class="game-status">
+          <p id="game-message" role="status" aria-live="polite">กำลังโหลดภาพ...</p>
+          <p class="piece-counter">เข้าที่แล้ว <strong id="piece-count">0</strong> / 20 ชิ้น</p>
+        </div>
+
+        <div class="playfield" id="playfield">
+          <div class="board" id="board" aria-label="กระดานจิ๊กซอว์">
+            <div class="board-image-hint" aria-hidden="true"></div>
+            <div class="board-grid" aria-hidden="true"></div>
+          </div>
+          <section class="tray" id="tray" aria-label="พื้นที่ชิ้นส่วน">
+            <h2>ชิ้นส่วน</h2>
+            <div class="tray-grid" id="tray-grid" aria-hidden="true"></div>
+          </section>
+          <div class="piece-layer" id="piece-layer" aria-label="ชิ้นส่วนจิ๊กซอว์"></div>
+        </div>
+      </section>
+      <footer>ภาพต้นฉบับ: car.jpg · ใช้เมาส์ลากชิ้นส่วนเพื่อเล่น</footer>
+    </main>
+    <audio id="background-music" src="game-music.mp3" preload="auto"></audio>
+  </body>
+</html>
